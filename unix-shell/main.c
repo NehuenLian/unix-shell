@@ -1,6 +1,11 @@
 ﻿#include <stdio.h>
 #include <stdlib.h>
 
+#include <sys/wait.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <string.h>
+
 #define LSH_RL_BUFSIZE 1024
 #define LSH_TOK_BUFSIZE 64
 #define LSH_TOK_DELIM " \t\r\n\a"
@@ -93,6 +98,31 @@ char** lsh_split_line(char* line)
 	tokens[position] = NULL;
 	return tokens;
 
+}
+
+int lsh_launch(char** args)
+{	/*
+	create a new process that runs the command
+	this process will be a child of the main process
+	the main process will wait for the child process to end in the do while.
+	*/
+	pid_t pid, wpid;
+	int status;
+
+	pid = fork();
+	if (pid == 0) {
+		if (execpv(args[0], args) == -1) {
+			perror("lsh");
+		}
+		exit(EXIT_FAILURE);
+	} else if (pid < 0) {
+		perror("lsh");
+	} else {
+		do {
+			wpid = waitpid(pid, &status, WUNTRACED);
+		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
+	}
+	return 1;
 }
 
 int main(int argc, char** argv)
