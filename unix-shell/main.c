@@ -14,11 +14,11 @@ int lsh_cd(char **args);
 int lsh_help(char **args);
 int lsh_exit(char **args);
 
-char* lsh_read_line(void)
+char *lsh_read_line(void)
 {
 	int bufsize = LSH_RL_BUFSIZE;
 	int position = 0;
-	char* buffer = malloc(sizeof(char) * bufsize);
+	char *buffer = malloc(sizeof(char) * bufsize);
 	int c;
 
 	if (!buffer) {
@@ -34,8 +34,7 @@ char* lsh_read_line(void)
 		if (c == EOF || c == '\n') {
 			buffer[position] = '\0';
 			return buffer;
-		}
-		else {
+		} else {
 			buffer[position] = c;
 		}
 		position++;
@@ -54,8 +53,8 @@ char* lsh_read_line(void)
 
 void  lsh_loop(void)
 {
-	char* line;
-	char** args;
+	char *line;
+	char **args;
 	int status;
 
 	do {
@@ -69,7 +68,7 @@ void  lsh_loop(void)
 	} while (status);
 }
 
-char** lsh_split_line(char* line)
+char **lsh_split_line(char *line) 
 {	/*
 	tokenize each part of the command and puts each token in tokens[] array
 	does this for every single command
@@ -104,7 +103,7 @@ char** lsh_split_line(char* line)
 
 }
 
-int lsh_launch(char** args)
+int lsh_launch(char **args)
 {	/*
 	create a new process that runs the command
 	this process will be a child of the main process
