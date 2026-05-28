@@ -109,8 +109,7 @@ char **lsh_split_line(char *line)
 
 int lsh_launch(char **args)
 {	/*
-	create a new process that runs the command
-	this process will be a child of the main process
+	create a new process that runs the command as a child of the main process
 	the main process will wait for the child process to end in the do while.
 	*/
 	pid_t pid, wpid;
