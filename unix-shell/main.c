@@ -196,11 +196,7 @@ int lsh_execute(char **args)
 
 int main(int argc, char **argv)
 {
-	// Load config files
-
-	// Run command loop
 	lsh_loop();
 
-	// Perform any shutdown/cleanup
 	return EXIT_SUCCESS;
 }
