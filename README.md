@@ -9,3 +9,5 @@ Compile:
 
 Execute:  
 `./main`
+
+- Use the command "help" to see available commands
