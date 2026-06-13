@@ -107,6 +107,10 @@ char **lsh_split_line(char *line)
 
 }
 
+/*
+execvp explanation: p is from "path" so execvp has a previous path with something like "/usr/bin/{argument}". 
+when user types "ls" or any not-built in command, the args concatenates to the path in execvp
+*/
 int lsh_launch(char **args)
 {	/*
 	create a new process that runs the command as a child of the main process
@@ -159,7 +163,7 @@ int lsh_cd(char **args)
 int lsh_help(char **args)
 {
 	int i;
-	printf("Shephen Brennan's LSH\n");
+	printf("Command Interpreter\n");
 	printf("Type program names and arguments, and hit enter.\n");
 	printf("The following are built in:\n");
 
